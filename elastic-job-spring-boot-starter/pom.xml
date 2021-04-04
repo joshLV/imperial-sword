@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.2.6.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>cn.lovike.tool</groupId>
+    <artifactId>elastic-job-spring-boot-starter</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>elastic-job-spring-boot-starter</name>
+    <description>Demo project for Spring Boot</description>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <elastic.job.version>2.1.5</elastic.job.version>
+    </properties>
+
+    <dependencies>
+        <!-- 该依赖包含了 Spring 的一些核心依赖  -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+        </dependency>
+
+        <!-- 该依赖可确保在项目构建期间生成元数据（META-INF/spring-autoconfigure-metadata.json）
+             Spring Boot 使用注解处理器收集元数据文件中的自动配置条件。
+             构建完并生成元数据文件后，可以快速地过滤不需要匹配的自动配置，这将缩短启动时间。
+             除此之外，之后在 IDEA 的`application`文件输入相关属性的前缀时，会出现代码提示（有注释也会出现哦）
+              -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- Lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!--调度框架-->
+        <dependency>
+            <groupId>com.dangdang</groupId>
+            <artifactId>elastic-job-lite-core</artifactId>
+            <version>${elastic.job.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.dangdang</groupId>
+            <artifactId>elastic-job-lite-spring</artifactId>
+            <version>${elastic.job.version}</version>
+        </dependency>
+    </dependencies>
+
+</project>

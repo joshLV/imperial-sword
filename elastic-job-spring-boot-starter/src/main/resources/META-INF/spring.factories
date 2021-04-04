@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+cn.lovike.elastic.job.spring.boot.starter.autoconfigure.ZooKeeperAutoConfiguration,\
+cn.lovike.elastic.job.spring.boot.starter.autoconfigure.SimpleJobAutoConfiguration,\
+cn.lovike.elastic.job.spring.boot.starter.autoconfigure.DataFlowJobAutoConfiguration
