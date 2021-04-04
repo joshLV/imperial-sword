@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!-- 读取配置文件相关信息 -->
+    <properties resource="generator/generatorConfig.properties"/>
+
+    <!-- 一个数据库一个 context -->
+    <context id="mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+        <!--<property name="beginningDelimiter" value="`"/>-->
+        <!--<property name="endingDelimiter" value="`"/>-->
+
+        <plugin type="${mapper.plugin}">
+            <property name="mappers" value="${mapper.Mapper}"/>
+        </plugin>
+
+        <commentGenerator>
+            <!-- 是否去除自动生成的注释 -->
+            <property name="suppressAllComments" value="true"/>
+            <!-- 是否生成注释的时间戳 -->
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
+
+        <!-- 数据库连接信息 -->
+        <jdbcConnection driverClass="${jdbc.driverClass}"
+                        connectionURL="${jdbc.url}"
+                        userId="${jdbc.username}"
+                        password="${jdbc.password}">
+            <!-- MySQL 8 增加此属性可以保证生成的 Mapper 文件语句不重复 -->
+            <property name="nullCatalogMeansCurrent" value="true"/>
+        </jdbcConnection>
+
+        <!-- Java 类型解析 -->
+        <javaTypeResolver>
+            <!-- 该属性为 true 时表示把 JDBC DECIMAL 和 NUMERIC 类型解析为 java.math.BigDecimal
+                 该属性默认为 false，表示把 JDBC DECIMAL 和 NUMERIC 类型解析为 Integer -->
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!-- 指定实体类的生成位置 -->
+        <!-- targetProject 指定实体类生成的位置，targetPackage 指定实体类生成时的包名（自动创建） -->
+        <javaModelGenerator targetProject="${targetJavaProject}" targetPackage="${targetModelPackage}">
+            <!-- enableSubPackages 是否让 schema 作为包的后缀 -->
+            <property name="enableSubPackages" value="false"/>
+            <!-- 清理从数据库返回值前后的空格，默认 false -->
+            <property name="trimStrings" value="false"/>
+        </javaModelGenerator>
+
+        <!-- 指定 Mapper.xml 文件生成位置：非注释在 resources 包下，注释为 java 包下（改为注释后在 prop 文件也需更改 targetXMLPackage） -->
+        <sqlMapGenerator targetProject="${targetResourcesProject}" targetPackage="${targetXMLPackage}">
+            <!-- enableSubPackages 是否让 schema 作为包的后缀 -->
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+        <!--<sqlMapGenerator targetProject="${targetJavaProject}" targetPackage="${targetXMLPackage}"/>-->
+
+        <!-- 指定 Mapper 接口生成位置 -->
+        <javaClientGenerator targetProject="${targetJavaProject}" targetPackage="${targetMapperPackage}"
+                             type="XMLMAPPER">
+            <!-- enableSubPackages 是否让 schema 作为包的后缀 -->
+            <property name="enableSubPackages" value="false"/>
+        </javaClientGenerator>
+
+        <!-- 需要映射的表 -->
+        <table tableName="table_name" domainObjectName="TableName">
+        </table>
+        <!-- 有些表的字段还需要指定 Java 类型
+         <table schema="" tableName="">
+            <columnOverride column="" javaType="" />
+        </table> -->
+    </context>
+</generatorConfiguration>
